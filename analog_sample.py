@@ -73,6 +73,7 @@ for item in ["ppt", "tmax", "tmin"]:
 A_agg=A.reshape(3, len(dist_id_sel))
 B_agg=B.reshape(3, len(dist_id_sel))
 dist=[]
+# processing the reference (C) matrix
 for ref_dist in range(0,len(dist_id_sel)):
     ## Step 1: standardization of the climate data with reference period (1895-1994 on monthly basis) ICV at ICV proxy ref_dist
     B_j=B_agg[:,ref_dist]
@@ -83,17 +84,17 @@ for ref_dist in range(0,len(dist_id_sel)):
     C_j_prime=C_j/C_j_sd
     ## Step 2: principal component analyses on the reference matrix C, and principal components extraction 
     C_j_prime_avg=np.mean(C_j_prime,axis=0)
-    m, n = np.shape(C_j_prime)
+    m, n=np.shape(C_j_prime)
     C_adj = []
-    C_j_prime_p_avg = np.tile(C_j_prime_avg, (m, 1))
-    C_adj = C_j_prime - C_j_prime_p_avg
+    C_j_prime_p_avg=np.tile(C_j_prime_avg, (m, 1))
+    C_adj=C_j_prime-C_j_prime_p_avg
     # calculate the covariate matrix
-    covC = np.cov(C_adj.T)   
+    covC=np.cov(C_adj.T)   
     # solve its eigenvalues and eigenvectors
-    C_eigen_val, C_eigen_vec=  np.linalg.eig(covC)  
+    C_eigen_val, C_eigen_vec=np.linalg.eig(covC)  
     # rank the eigenvalues: in here, I did not apply the truncation rule for the sake of limited variable availability
-    index = np.argsort(-C_eigen_val)
-    finalData = []
+    index=np.argsort(-C_eigen_val)
+    finalData=[]
     # C matrix, corrected with PCA
     C_pca_vec=C_eigen_vec.T
     # A and B matrices, corrected with PCA
@@ -120,8 +121,10 @@ for min_ind in range(0,min_dist_val.shape[0]):
     min_dist_ind=np.append(min_dist_ind,np.where(distances[:,min_ind]==np.amin(min_dist_val[min_ind])))
     print("Future", dist_names_valid[min_ind], "is analogous to current",   dist_names_valid[int(min_dist_ind[min_ind])] )
 ending_clock = datetime.now()  
-print(ending_clock)
+print(ending_clock-starting_clock)
 #starting datetime.datetime(2020, 6, 4, 18, 31, 24, 851147) i7-4810mq, 16GB
 #ending datetime.datetime(2020, 6, 4, 18, 30, 18, 658403) i7-4810mq, 16GB, 66 seconds
 #starting datetime.datetime(2020, 6, 4, 21, 47, 24, 848188) i7-6700k, 32GB
 #ending datetime.datetime(2020, 6, 4, 21, 48, 4, 888163) i7-6700k, 32GB, 40 seconds
+# R5-3550H, 16GB, 32 seconds
+# i3-6100u, 8GB, 91 seconds
