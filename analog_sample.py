@@ -106,7 +106,7 @@ for ref_dist in range(0,len(dist_id_sel)):
     Z_j_sd=Z_j.std(axis=0)
     X_prime=X/Z_j_sd
     Y_j_prime=Y_j/Z_j_sd
-    ## Step 3b: find the Mahalanobis nearest neighbors, A.K.A. Euclidean nearest neighbors with a PCA-standarized correction matrix
+    ## Step 3b: calculate the Mahalanobis distances, A.K.A. Euclidean distances with a PCA-standarized correction matrix
     for int_loop in range(0,len(dist_id_sel)):
         distances[int_loop,ref_dist]=np.linalg.norm(X_prime[int_loop]-Y_j_prime)
         print(ref_dist,int_loop)
