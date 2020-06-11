@@ -90,7 +90,7 @@ for ref_dist in range(0,len(dist_id_sel)):
     C_adj=C_j_prime-C_j_prime_p_avg
     # calculate the covariate matrix
     covC=np.cov(C_adj.T)   
-    # solve its eigenvalues and eigenvectors
+    # solve for its eigenvalues and eigenvectors
     C_eigen_val, C_eigen_vec=np.linalg.eig(covC)  
     # rank the eigenvalues: in here, I did not apply the truncation rule for the sake of limited variable availability
     index=np.argsort(-C_eigen_val)
