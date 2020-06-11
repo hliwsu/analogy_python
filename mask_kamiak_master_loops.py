@@ -11,7 +11,6 @@ import os.path
 # Read rangelands boundary files (shapefile)
 # my copy ~/haoli.li
 # rb = gpd.read_file('/home/haoli.li/USDR/S_USA.RangerDistrict.shp')
-
 # public copy ~/data/rajagopalan/MC2/USRD
 rb = gpd.read_file("/data/rajagopalan/MC2/USRD/S_USA.RangerDistrict.shp")
 rb.head()
