@@ -133,7 +133,7 @@ dist_names_all = np.load(
     "/Users/haoli/OneDrive/Work/Analogy/Python codes/analog/dist_n_all.npy")
 dist_names_id = np.load(
     '/Users/haoli/OneDrive/Work/Analogy/Python codes/analog/dist_id_valid.npy')
-# find smallest Mahalanobis distances, index them, and print the corresponding districts names.
+# find smallest Mahalanobis distances, index them, and print the corresponding districts names. 
 for min_ind in range(0, min_dist_val.shape[0]):
     min_dist_ind = np.append(min_dist_ind, np.where(
         distances[:, min_ind] == np.amin(min_dist_val[min_ind])))
