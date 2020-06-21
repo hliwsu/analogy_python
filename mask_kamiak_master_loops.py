@@ -61,7 +61,7 @@ for file in range(0,all_f):
     rb_a=list(range(0,rb_len))
     rb_a=[x for x in rb_a if x not in n_v_r]
     rb_a_len=len(rb_a)
-    cl_data=np.empty((20,yr_len,rb_a_len))
+    cl_data=np.empty((yr_len,rb_a_len))
     # loop years
     for yr in range(0,yr_len): 
         ncf_t=ncf.isel(time=slice(yr,yr+1))
@@ -75,7 +75,7 @@ for file in range(0,all_f):
             id_lat = lat[np.where(~np.all(np.isnan(sel_mask), axis=1))]
             out_sel = ncf_t.sel(lat = slice(id_lat[0], id_lat[-1]), lon = slice(id_lon[0], id_lon[-1])).compute().where(mask == r_d)
             a=out_sel.ppt.values
-            cl_data[0,yr,i]=np.nanmean(a)
+            cl_data[yr,i]=np.nanmean(a)
             i=1+1
             print("Average climatic value is", np.nanmean(a), "in the year of", yr)
     np.save(str(file)+'.npy',cl_data)
