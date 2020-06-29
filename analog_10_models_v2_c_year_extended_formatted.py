@@ -1,8 +1,8 @@
+%reset - f
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import os
 import numpy as np
-%reset - f
 # Starting time
 starting_clock = datetime.now()
 print(starting_clock)
